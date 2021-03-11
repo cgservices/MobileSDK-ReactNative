@@ -22,7 +22,5 @@ Pod::Spec.new do |s|
   s.libraries = "SelligentMobile2.5"
 
   s.dependency "React"
-  s.dependency 'PlotPlugin', '3.3.2'
 end
 
-  
