@@ -112,11 +112,9 @@ afterEvaluate { project ->
 }
 
 def loadSelligentSettings() {
-    def selligentFileName = "selligent.json"
-    println("Reading Selligent settings from: $selligentFileName")
-
-    File f = new File("$project.rootDir/../$selligentFileName");
-
+    def selligentFileName = rootProject.ext.selligentJsonPath
+    File f = new File("$project.rootDir/$selligentFileName");
+    println("Reading Selligent settings from: ${f.getPath()}")
     def resultingSettings = null
     if (f.exists()) {
         resultingSettings = ""
@@ -124,9 +122,8 @@ def loadSelligentSettings() {
             resultingSettings += line.replace("\"", "\\\"").replaceAll("\\s", "")
         }
     } else {
-        throw new InvalidUserDataException("The selligent.json file could not be found. Please make sure you provide this file in the root of this project.")
+        throw new InvalidUserDataException("The ${f.getPath()} file could not be found. Please make sure you provide this file in the root of this project.")
     }
-
     return resultingSettings
 }
 
@@ -136,7 +133,7 @@ tasks.whenTaskAdded { task ->
             if (task.name.toLowerCase() == "pre${variant.name}build") {
                 def selligentSettings = loadSelligentSettings()
                 if (selligentSettings != null) {
-                    variant.buildConfigField "String", "SELLIGENT_SETTINGS", "\"$selligentSettings\""
+                    buildConfigField "String", "SELLIGENT_SETTINGS", "\"$selligentSettings\""
                 }
             }
 
