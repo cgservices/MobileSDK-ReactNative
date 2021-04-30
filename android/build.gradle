@@ -26,6 +26,23 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    flavorDimensions "version"
+
+    productFlavors {
+        production {
+            dimension "version"
+            ext {
+              selligentJsonPath = '../selligent/prod/selligent.json'
+            }
+        }
+        development {
+            dimension "version"
+            ext {
+              selligentJsonPath = '../selligent/dev/selligent.json'
+            }
+        }
+    }
 }
 
 repositories {
@@ -111,8 +128,7 @@ afterEvaluate { project ->
     }
 }
 
-def loadSelligentSettings() {
-    def selligentFileName = rootProject.ext.selligentJsonPath
+def loadSelligentSettings(selligentFileName) {
     File f = new File("$project.rootDir/$selligentFileName");
     println("Reading Selligent settings from: ${f.getPath()}")
     def resultingSettings = null
@@ -130,13 +146,12 @@ def loadSelligentSettings() {
 tasks.whenTaskAdded { task ->
     task.doFirst() {
         android.libraryVariants.all { variant ->
-            if (task.name.toLowerCase() == "pre${variant.name}build") {
-                def selligentSettings = loadSelligentSettings()
+            if (task.name.toLowerCase() == "pre${variant.name}build".toLowerCase()) {
+                def selligentSettings = loadSelligentSettings(android.productFlavors[variant.getFlavorName()].ext.selligentJsonPath)
                 if (selligentSettings != null) {
                     buildConfigField "String", "SELLIGENT_SETTINGS", "\"$selligentSettings\""
                 }
             }
-
         }
     }
 }
