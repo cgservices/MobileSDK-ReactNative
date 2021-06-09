@@ -434,7 +434,6 @@ public class RNSelligent extends ReactContextBaseJavaModule implements Lifecycle
         final Activity currentActivity = getCurrentActivity();
 
         if (currentActivity != null) {
-            currentActivity.setIntent(intent);
             currentActivity.unregisterReceiver(receiver);
         }
     }
@@ -447,6 +446,7 @@ public class RNSelligent extends ReactContextBaseJavaModule implements Lifecycle
         final Activity currentActivity = getCurrentActivity();
 
         if (currentActivity != null) {
+            currentActivity.setIntent(intent);
             smManager.checkAndDisplayMessage(intent, currentActivity);
         }
     }
