@@ -178,6 +178,7 @@ public class RNSelligent extends ReactContextBaseJavaModule implements Lifecycle
                             buttonsArray.pushMap(buttonMap);
                         }
                     }
+
                     messageMap.putArray("buttons", buttonsArray);
 
                     resultingMessagesArray.pushMap(messageMap);
