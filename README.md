@@ -7,6 +7,8 @@ This module provides an API for the usage of the Selligent SDK in React Native.
 * Android
 * iOS
 
+> _**Important:** Since version 2.4.0 of this module we require your app to use the Android Gradle Plugin version 4.1.0 or higher in order to build on Android. This is the default Android Gradle Plugin version since React Native version 0.64.0 but can be manually increased in older versions of React Native._
+
 ## ToC
 
 * [Installation](#installation)
@@ -59,6 +61,7 @@ This module provides an API for the usage of the Selligent SDK in React Native.
 | loadCacheAsynchronously                     | boolean                                                                                       | No       | Android Only |
 | fullyQualifiedNotificationActivityClassName | string                                                                                        | No       | Android Only |
 | remoteMessageDisplayType                    | enum [Selligent.AndroidRemoteMessagesDisplayType](#selligentAndroidRemoteMessagesDisplayType) | No       | Android Only |
+| notificationIconColor                       | string                                                                                        | No       | Android Only |
 
    ​
 
@@ -258,14 +261,7 @@ Add the following properties to the `selligent.json` file:
     ```
 
 
-
-4. Add Selligent to `Header Search Paths` in `Build Settings` of your target:
-
-    ```
-    $(SRCROOT)/../node_modules/@selligent-marketing-cloud/selligent-react-native/ios/
-    ```
-
-5. Create a `Podfile` (if there isn't one already) in the `/ios` folder and add the following:
+5. Create a podfile (if there isn't one already) in the `/ios` folder and add the following:
 
    ```ruby
    target 'REPLACEWITHYOURTARGETNAME'
@@ -375,7 +371,8 @@ Add the following properties to the `selligent.json` file:
 2. Follow section 4 **Configure the APNS (Apple Push Notification Service)**, of the **IOS - Using the SDK** pdf.  
 
 3. If you want rich push notifications, follow section 6.9 **Notification Extensions** as well.  
-Make sure you add your `appGroupId` to the `selligent.json`.
+   Make sure you add your `appGroupId` to the `selligent.json`.
+   > **IMPORTANT!** make sure your `appGroupId` has the following structure or it will not work: `group.{MAIN_APP_BUNDLE_ID}`
 
 #### Geolocation
 
@@ -546,6 +543,8 @@ You can catch the deeplinks 2 ways:
     * [setNotificationSmallIcon example](#setnotificationsmallicon-example)
   * [Selligent.setNotificationLargeIcon(successCallback, errorCallback, iconName)](#selligentsetnotificationlargeiconsuccesscallback-errorcallback-iconname)
     * [setNotificationLargeIcon example](#setnotificationlargeicon-example)
+  * [Selligent.setNotificationIconColor(successCallback, errorCallback, color)](#selligentsetnotificationiconcolorsuccesscallback-errorcallback-color)
+    * [setNotificationIconColor example](#setnotificationiconcolor-example)
   * [Selligent.getGCMToken(successCallback)](#selligentgetgcmtokensuccesscallback)
     * [getGCMToken Example](#getgcmtoken-example)
   * [Selligent.getRemoteMessagesDisplayType(successCallback, errorCallback)](#selligentgetremotemessagesdisplaytypesuccesscallback-errorcallback)
@@ -594,6 +593,32 @@ Selligent.getVersionLib(
     (versionLib) => { // success callback
         alert(versionLib);
     }
+);
+```
+
+<div align="right">
+    <b><a href="#api-reference">back to API ToC</a></b>
+</div>
+
+#### Selligent.setNotificationIconColor(successCallback, errorCallback, color)
+
+Set the icon color of a notification on Android.
+
+The method accepts a `color` parameter which is a string containing the hex value of color.
+
+> _The notification color can also be set by setting the notificationIconColor parameter in `selligent.json` to the hex color value_
+
+##### setNotificationIconColor example
+
+```javascript
+Selligent.setNotificationIconColor(
+    (response) => { // success callback
+        ...
+    },
+    (error) => { // error callback
+        ...
+    },
+    "#00b8fb"
 );
 ```
 
