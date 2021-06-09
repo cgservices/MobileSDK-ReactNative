@@ -12,6 +12,7 @@ class Settings {
     private String activityName;
     private String notificationSmallIcon;
     private String notificationLargeIcon;
+    private String notificationIconColor;
     private Boolean doNotFetchTheToken = false;
     private Boolean doNotListenToThePush = false;
     private Boolean loadCacheAsynchronously = false;
@@ -48,6 +49,10 @@ class Settings {
 
     public String getNotificationLargeIcon() {
         return notificationLargeIcon;
+    }
+
+    public String getNotificationIconColor() {
+        return notificationIconColor;
     }
 
     public Boolean getConfigureLocationServices() {
@@ -93,6 +98,10 @@ class Settings {
 
         if (settingsHashMap.containsKey("notificationLargeIcon")) {
             settings.notificationLargeIcon = (String) settingsHashMap.get("notificationLargeIcon");
+        }
+
+        if(settingsHashMap.containsKey("notificationIconColor")) {
+            settings.notificationIconColor = (String) settingsHashMap.get("notificationIconColor");
         }
 
         if (settingsHashMap.containsKey("doNotFetchTheToken")) {

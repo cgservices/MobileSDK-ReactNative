@@ -97,6 +97,16 @@ export function setNotificationLargeIcon(
   errorCallback: Function,
   iconName: string
 ): void;
+export function setNotificationIconColor(
+  successCallback: Function,
+  errorCallback: Function,
+  color: string
+): void;
+export function setNotificationActivity(
+  successCallback: Function,
+  errorCallback: Function,
+  activityName: string
+): void;
 export function getGCMToken(successCallback: Function): void;
 export function getRemoteMessagesDisplayType(successCallback: Function): void;
 export function subscribeToEvents(

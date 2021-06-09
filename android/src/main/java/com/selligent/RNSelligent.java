@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import android.graphics.Color;
 import android.util.Log;
 
 import com.facebook.react.bridge.ActivityEventListener;
@@ -90,6 +91,15 @@ public class RNSelligent extends ReactContextBaseJavaModule implements Lifecycle
                 final int largeIconResourceId = resources.getIdentifier(settings.getNotificationLargeIcon(), "drawable", application.getPackageName());
                 if (largeIconResourceId != 0) {
                     smManager.setNotificationLargeIcon(largeIconResourceId);
+                }
+            }
+
+            if (settings.getNotificationIconColor() != null && !settings.getNotificationIconColor().isEmpty()) {
+                try {
+                    final int color = Color.parseColor(settings.getNotificationIconColor());
+                    smManager.setNotificationIconColor(color);
+                } catch (IllegalArgumentException e) {
+                    Log.e("RNSelligent", "notificationIconColor must be a color hex string.");
                 }
             }
 
@@ -326,6 +336,27 @@ public class RNSelligent extends ReactContextBaseJavaModule implements Lifecycle
     }
 
     @ReactMethod
+    public void setNotificationIconColor(final String colorString, final Callback successCallback, final Callback errorCallback) {
+        try {
+            final int color = Color.parseColor(colorString);
+            smManager.setNotificationIconColor(color);
+            successCallback.invoke();
+        } catch (IllegalArgumentException e) {
+            errorCallback.invoke("color must be a color hex string.");
+        }
+    }
+
+    @ReactMethod
+    public void setNotificationActivity(final String activityName, final Callback successCallback, final Callback errorCallback) {
+        try {
+            SMManager.NOTIFICATION_ACTIVITY = Class.forName(activityName);
+            successCallback.invoke();
+        } catch (ClassNotFoundException e) {
+            errorCallback.invoke(String.format("Activity %s not found.", activityName));
+        }
+    }
+
+    @ReactMethod
     public void getGCMToken(Callback callback) {
         final String gcmToken = smManager.getGCMToken();
         callback.invoke(gcmToken);
@@ -403,6 +434,7 @@ public class RNSelligent extends ReactContextBaseJavaModule implements Lifecycle
         final Activity currentActivity = getCurrentActivity();
 
         if (currentActivity != null) {
+            currentActivity.setIntent(intent);
             currentActivity.unregisterReceiver(receiver);
         }
     }

@@ -61,6 +61,7 @@ This module provides an API for the usage of the Selligent SDK in React Native.
 | loadCacheAsynchronously                     | boolean                                                                                       | No       | Android Only |
 | fullyQualifiedNotificationActivityClassName | string                                                                                        | No       | Android Only |
 | remoteMessageDisplayType                    | enum [Selligent.AndroidRemoteMessagesDisplayType](#selligentAndroidRemoteMessagesDisplayType) | No       | Android Only |
+| notificationIconColor                       | string                                                                                        | No       | Android Only |
 
    ​
 
@@ -260,14 +261,7 @@ Add the following properties to the `selligent.json` file:
     ```
 
 
-
-4. Add Selligent to `Header Search Paths` in `Build Settings` of your target:
-
-    ```
-    $(SRCROOT)/../node_modules/@selligent-marketing-cloud/selligent-react-native/ios/
-    ```
-
-5. Create a `Podfile` (if there isn't one already) in the `/ios` folder and add the following:
+5. Create a podfile (if there isn't one already) in the `/ios` folder and add the following:
 
    ```ruby
    target 'REPLACEWITHYOURTARGETNAME'
@@ -549,6 +543,8 @@ You can catch the deeplinks 2 ways:
     * [setNotificationSmallIcon example](#setnotificationsmallicon-example)
   * [Selligent.setNotificationLargeIcon(successCallback, errorCallback, iconName)](#selligentsetnotificationlargeiconsuccesscallback-errorcallback-iconname)
     * [setNotificationLargeIcon example](#setnotificationlargeicon-example)
+  * [Selligent.setNotificationIconColor(successCallback, errorCallback, color)](#selligentsetnotificationiconcolorsuccesscallback-errorcallback-color)
+    * [setNotificationIconColor example](#setnotificationiconcolor-example)
   * [Selligent.getGCMToken(successCallback)](#selligentgetgcmtokensuccesscallback)
     * [getGCMToken Example](#getgcmtoken-example)
   * [Selligent.getRemoteMessagesDisplayType(successCallback, errorCallback)](#selligentgetremotemessagesdisplaytypesuccesscallback-errorcallback)
@@ -597,6 +593,32 @@ Selligent.getVersionLib(
     (versionLib) => { // success callback
         alert(versionLib);
     }
+);
+```
+
+<div align="right">
+    <b><a href="#api-reference">back to API ToC</a></b>
+</div>
+
+#### Selligent.setNotificationIconColor(successCallback, errorCallback, color)
+
+Set the icon color of a notification on Android.
+
+The method accepts a `color` parameter which is a string containing the hex value of color.
+
+> _The notification color can also be set by setting the notificationIconColor parameter in `selligent.json` to the hex color value_
+
+##### setNotificationIconColor example
+
+```javascript
+Selligent.setNotificationIconColor(
+    (response) => { // success callback
+        ...
+    },
+    (error) => { // error callback
+        ...
+    },
+    "#00b8fb"
 );
 ```
 
