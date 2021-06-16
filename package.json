@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SelligentMarketingCloud/MobileSDK-ReactNative.git"
+    "url": "github://cgservices/MobileSDK-ReactNative"
   },
   "bugs": {
-    "url": "https://github.com/SelligentMarketingCloud/MobileSDK-ReactNative/issues"
+    "url": "https://github.com/cgservices/MobileSDK-ReactNative/issues"
   },
-  "homepage": "https://github.com/SelligentMarketingCloud/MobileSDK-ReactNative#readme",
+  "homepage": "https://github.com/cgservices/MobileSDK-ReactNative#readme",
   "keywords": [
     "react-native"
   ],
