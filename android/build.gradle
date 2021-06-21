@@ -34,25 +34,25 @@ android {
         productionRecharge {
             dimension "version"
             ext {
-              selligentJsonPath = '../selligent/prod/selligent.json'
+              selligentJsonPath = '../selligent/prod/recharge_selligent.json'
             }
         }
         developmentRecharge {
             dimension "version"
             ext {
-              selligentJsonPath = '../selligent/dev/selligent.json'
+              selligentJsonPath = '../selligent/dev/recharge_selligent.json'
             }
         }
         productionBeltegoed {
             dimension "version"
             ext {
-              selligentJsonPath = '../selligent/prod/selligent.json'
+              selligentJsonPath = '../selligent/prod/beltegoed_selligent.json'
             }
         }
         developmentBeltegoed {
             dimension "version"
             ext {
-              selligentJsonPath = '../selligent/dev/selligent.json'
+              selligentJsonPath = '../selligent/dev/beltegoed_selligent.json'
             }
         }
     }
