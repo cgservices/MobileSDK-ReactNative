@@ -31,13 +31,25 @@ android {
     flavorDimensions "version"
 
     productFlavors {
-        production {
+        productionRecharge {
             dimension "version"
             ext {
               selligentJsonPath = '../selligent/prod/selligent.json'
             }
         }
-        development {
+        developmentRecharge {
+            dimension "version"
+            ext {
+              selligentJsonPath = '../selligent/dev/selligent.json'
+            }
+        }
+        productionBeltegoed {
+            dimension "version"
+            ext {
+              selligentJsonPath = '../selligent/prod/selligent.json'
+            }
+        }
+        developmentBeltegoed {
             dimension "version"
             ext {
               selligentJsonPath = '../selligent/dev/selligent.json'
