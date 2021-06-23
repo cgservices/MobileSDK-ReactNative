@@ -55,6 +55,18 @@ android {
               selligentJsonPath = '../selligent/dev/beltegoed_selligent.json'
             }
         }
+        productionGuthaben {
+            dimension "version"
+            ext {
+              selligentJsonPath = '../selligent/prod/guthaben_selligent.json'
+            }
+        }
+        developmentGuthaben {
+            dimension "version"
+            ext {
+              selligentJsonPath = '../selligent/dev/guthaben_selligent.json'
+            }
+        }
     }
 }
 
